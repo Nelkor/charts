@@ -11,7 +11,7 @@ module.exports = {
     parser: 'babel-eslint',
   },
   rules: {
-    'indent': ['error', 2],
+    'indent': ['error', 2, { SwitchCase: 1 }],
     'no-multi-spaces': 'error',
     'space-infix-ops': 'error',
     'comma-spacing': ['error', { 'before': false, 'after': true }],
