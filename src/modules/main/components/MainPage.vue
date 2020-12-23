@@ -4,19 +4,29 @@
       class="chart"
       :items="donutData"
     />
+
+    <div class="circle-wrapper">
+      <RechargeableCircle
+        :charge-level="chargeLevel"
+        :segments-count="60"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import DonutChart from '@ui/components/DonutChart'
+import RechargeableCircle from '@ui/components/RechargeableCircle'
 
 export default {
   name: 'MainPage',
   components: {
     DonutChart,
+    RechargeableCircle,
   },
   data() {
     return {
+      chargeLevel: .4,
       donutData: [
         {
           name: 'Центральный',
@@ -66,6 +76,11 @@ export default {
 }
 
 .chart {
+  width: 500px;
+  height: 500px;
+}
+
+.circle-wrapper {
   width: 500px;
   height: 500px;
 }
