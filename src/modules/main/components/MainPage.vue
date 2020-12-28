@@ -8,9 +8,17 @@
     <div class="circle-wrapper">
       <RechargeableCircle
         :charge-level="chargeLevel"
-        :segments-count="60"
+        :segments-count="80"
       />
     </div>
+
+    <input
+      type="range"
+      min="0"
+      max="1"
+      step="0.001"
+      v-model="chargeLevel"
+    >
   </div>
 </template>
 

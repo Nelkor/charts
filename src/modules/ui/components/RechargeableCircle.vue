@@ -35,29 +35,31 @@
 
     <g filter="url(#shine-uncharged)">
       <line
-        v-for="angle in unchargedAngles"
-        :key="angle"
+        v-for="segment in segments"
+        :key="segment.angle"
         stroke-width=".5"
-        x1="30"
+        x1="34"
         y1="0"
         x2="40"
         y2="0"
         stroke="white"
-        :transform="`rotate(${angle})`"
+        :transform="`rotate(${segment.angle})`"
+        :opacity="segment.charge > +chargeLevel ? 1 : 0"
       />
     </g>
 
     <g filter="url(#shine-charged)">
       <line
-        v-for="angle in chargedAngles"
-        :key="angle"
+        v-for="segment in segments"
+        :key="segment.angle"
         stroke-width=".5"
-        x1="30"
+        x1="34"
         y1="0"
         x2="40"
         y2="0"
         stroke="yellow"
-        :transform="`rotate(${angle})`"
+        :transform="`rotate(${segment.angle})`"
+        :opacity="segment.charge > +chargeLevel ? 0 : 1"
       />
     </g>
   </svg>
@@ -69,7 +71,7 @@ export default {
   side: 100,
   props: {
     chargeLevel: {
-      type: Number,
+      type: [Number, String],
       default: 0,
       validator: value => value >= 0 && value <= 1,
     },
@@ -96,16 +98,6 @@ export default {
 
       return Array.from({ length: this.segmentsCount })
         .map(createSegment)
-    },
-    chargedAngles() {
-      return this.segments
-        .filter(segment => segment.charge <= this.chargeLevel)
-        .map(segment => segment.angle.toFixed(3))
-    },
-    unchargedAngles() {
-      return this.segments
-        .filter(segment => segment.charge >= this.chargeLevel)
-        .map(segment => segment.angle.toFixed(3))
     },
   },
 }
